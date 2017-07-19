@@ -22,7 +22,11 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src')
+      '@': resolve('src'),
+      // 配置路由的绝对路径
+      'components': path.resolve(__dirname,'../src/components'),
+      // 配置common的绝对路径
+      'common': path.resolve(__dirname,'../src/common')
     }
   },
   module: {

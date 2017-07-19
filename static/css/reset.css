@@ -1,0 +1,73 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, legend, button
+form, fieldset, input, textarea, p, blockquote, th, td {
+  　　padding: 0;
+  　　margin: 0;
+}
+
+/* 酌情修改 */
+body {
+  background: #fff;
+  color: #333;
+  font-size: 12px;
+  margin-top: 5px;
+  font-family: " Microsoft YaHei", "SimSun", "宋体", "Arial Narrow", "Verdana";
+}
+
+a {
+  text-decoration: none;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+/* 标题元素样式清除 */
+h1, h2, h3, h4, h5, h6 {
+  　　font-weight: normal;
+  　　font-size: 100%;
+}
+
+/* 短引用的内容可取值：''或"" */
+q:before, q:after {
+  content: "";
+}
+
+/* 图片等无边框 */
+img {
+  border: none;
+}
+
+/*禁用了文本的拖拉，尤其在谷歌下  */
+textarea  {
+   resize: none;
+}
+
+ 
+  /* 链接样式，颜色可酌情修改 */
+  /*a:link {color:#009;}*/
+  /*a:visited {color:#800080;}*/
+  /*a:hover,a:active,a:focus {color:#c00; text-decoration:none;}*/
+
+/*设置表格的边框被合并为一个单一的边框,*/
+/*指定分隔边框模型中单元格边界之间的距离为0*/
+/*border-spacing 除非 border-collapse 被设置为 separate，否则将忽略这个属性.*/
+table {
+  　　border-collapse: collapse;
+  　　border-spacing: 0;
+}
+
+/*清除浮动1*/
+.clear {
+  clear: both;
+}
+
+/*清除浮动2*/
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.clearfix {
+  zoom: 1;
+}

@@ -1,15 +1,16 @@
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, legend, button
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, legend, button
 form, fieldset, input, textarea, p, blockquote, th, td {
-  　　padding: 0;
   　　margin: 0;
+  　　padding: 0;
 }
 
 /* 酌情修改 */
 body {
+  padding: 0;
+  margin: 0;
   background: #fff;
   color: #333;
   font-size: 12px;
-  margin-top: 5px;
   font-family: " Microsoft YaHei", "SimSun", "宋体", "Arial Narrow", "Verdana";
 }
 

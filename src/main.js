@@ -7,6 +7,7 @@ import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 import App from './App';
 
+// 全局注册
 Vue.use(VueRouter);
 Vue.use(VueResource);
 

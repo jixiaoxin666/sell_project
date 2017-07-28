@@ -1,9 +1,3 @@
-div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, legend, button
-form, fieldset, input, textarea, p, blockquote, th, td {
-  　　margin: 0;
-  　　padding: 0;
-}
-
 /* 酌情修改 */
 body {
   padding: 0;
@@ -19,13 +13,17 @@ a {
 }
 
 ol, ul {
+  padding: 0;
+  margin: 0;
   list-style: none;
 }
 
 /* 标题元素样式清除 */
 h1, h2, h3, h4, h5, h6 {
-  　　font-weight: normal;
-  　　font-size: 100%;
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+  font-size: 100%;
 }
 
 /* 短引用的内容可取值：''或"" */
@@ -48,10 +46,9 @@ textarea  {
   /*a:link {color:#009;}*/
   /*a:visited {color:#800080;}*/
   /*a:hover,a:active,a:focus {color:#c00; text-decoration:none;}*/
-
-/*设置表格的边框被合并为一个单一的边框,*/
-/*指定分隔边框模型中单元格边界之间的距离为0*/
-/*border-spacing 除非 border-collapse 被设置为 separate，否则将忽略这个属性.*/
+  /*设置表格的边框被合并为一个单一的边框,*/
+  /*指定分隔边框模型中单元格边界之间的距离为0*/
+  /*border-spacing 除非 border-collapse 被设置为 separate，否则将忽略这个属性.*/
 table {
   　　border-collapse: collapse;
   　　border-spacing: 0;

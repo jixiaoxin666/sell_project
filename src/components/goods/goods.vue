@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index}">
+        <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index} " @click="selectMenu(index,$event)">
           <span class="text border-1px">
             <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
           </span>
@@ -62,11 +62,12 @@
         for (let i = 0; i < this.listHeight.length; i++) {
           let height1 = this.listHeight[i];
           let height2 = this.listHeight[i + 1];
-          if (!height2 || (this.scrollY > height1 && this.scrollY < height2)) {
+//          当遍历到最后一个或在一个区间内
+          if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
             return i;
           }
-          return 0;
         }
+        return 0;
       }
     },
     created() {
@@ -75,7 +76,8 @@
         response = response.body;
         if (response.errno === ERR_OK) {
           this.goods = response.data;
-          // 等DOM加载完之后调用该方法
+          // 等DOM加载完之后调用里面的方法
+          // 把需要在dom加载完之后 调用的方法 放里面
           this.$nextTick(() => {
             this._initScroll();
             this._calculateHeight();
@@ -84,8 +86,25 @@
       });
     },
     methods: {
+      selectMenu(index, event) {
+//        click事件 一种是默认的 一种是派发的
+//        该判断是为了防止执行两次click事件 重复执行该方法 所以把默认的click事件return
+//        event 是click事件传过来的event
+//        如果是自定义派发的click事件 则event._constructed为true 如果是默认的则值为false
+        if (!event._constructed) {
+          return;
+        }
+        let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
+        let el = foodList[index];
+        this.foodsScroll.scrollToElement(el, 300);
+        console.log(index);
+      },
       _initScroll() {
-        this.menuScroll = new BScroll(this.$refs.menuWrapper, {});
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {
+          // BScroll 会监听touchStart touchEnd事件 移动端 默认会阻止该事件 导致点击事件不起作用 但是pc端是不会阻止的
+          // 该设置使click事件有作用 默认派发了一个点击事件
+          click: true
+        });
         this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
           probeType: 3
         });
@@ -103,6 +122,7 @@
           height += item.clientHeight;
           this.listHeight.push(height);
         }
+        console.log(this.listHeight);
       }
     }
   };

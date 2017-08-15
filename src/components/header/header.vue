@@ -19,12 +19,12 @@
       </div>
       <div v-if="seller.supports" class="support-count" @click="showDetail">
         <span class="count">{{seller.supports.length}}个</span>
-        <i class="icon-丸_pill5"></i>
+        <i class="icon-enter"></i>
       </div>
     </div>
     <div class="bulletin-wrapper" @click="showDetail">
       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
-      <i class="icon-丸_pill5"></i>
+      <i class="icon-enter"></i>
     </div>
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%">
@@ -62,7 +62,7 @@
       <!--包装层end-->
       <!--需要定住的底部start-->
       <div class="detail-close" @click="hideDetail">
-        <i class="icon-丸_pill5"></i>
+        <i class="icon-close"></i>
       </div>
       <!--需要定住的底部end-->
     </div>
@@ -180,7 +180,7 @@
         .count
           /*vertical-align: top*/
           font-size: 10px
-        .icon-丸_pill5
+        .icon-enter
           margin-left: 2px
           line-height: 24px
           font-size: 10px
@@ -207,7 +207,7 @@
         margin: 0 4px
         vertical-align: top
         font-size: 10px
-      .icon-丸_pill5
+      .icon-enter
         position: absolute
         font-size: 10px
         right: 12px

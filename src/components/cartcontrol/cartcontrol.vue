@@ -2,12 +2,12 @@
   <div class="cartcontrol">
     <transition name="move">
       <!--把减号分为两部分div和span是为了div负责平移 span负责滚动-->
-    <div class="cart-decrease " v-show="food.count>0" @click="decreaseCart">
+    <div class="cart-decrease " v-show="food.count>0" @click.stop.preven="decreaseCart">
       <span class="inner icon-offline"></span>
     </div>
     </transition>
     <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
-    <div class="cart-add icon-addition_fill" @click="addCart"></div>
+    <div class="cart-add icon-addition_fill" @click.stop.prevent="addCart"></div>
   </div>
 </template>
 
@@ -40,7 +40,8 @@
         } else {
           this.food.count++;
         }
-//    通过$dispatch方法去派发一个事件
+        // 派发一个事件(cart.add) 把当前的元素(event.target)传过去
+        // 可以在兄弟组件(shopcart组件)中监听这个事件
         Bus.$emit('cart.add', event.target);
       },
       decreaseCart() {

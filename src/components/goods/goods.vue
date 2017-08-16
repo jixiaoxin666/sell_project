@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
@@ -16,7 +17,7 @@
             {{item.name}}
           </h1>
           <ul>
-            <li v-for="food in item.foods" class="food-item border-1px">
+            <li @click="selectFood(food, $event)" v-for="food in item.foods" class="food-item border-1px">
               <div class="icon">
                 <img width="57" height="57" :src="food.icon">
               </div>
@@ -42,15 +43,21 @@
     <!--把选中的商品传递给购物车组件(select-foods)-->
     <shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
-
+  <!--把选中的食物传给food组件-->
+  <food :food="selectedFood" ref="food"></food>
+  </div>
 </template>
 
 
 <script type="text/ecmascript-6">
+  // 上下滚动js插件
   import BScroll from 'better-scroll';
-//  引入组件
+  // 引入购物车组件
   import shopcart from 'components/shopcart/shopcart';
+  // 引入增减商品数量组件
   import cartcontrol from 'components/cartcontrol/cartcontrol';
+  // 引入商品详情组件
+  import food from 'components/food/food';
   const ERR_OK = 0;
   export default{
 //    接收传过来的seller 在页面中就可以使用
@@ -63,7 +70,8 @@
       return {
         goods: [],
         listHeight: [],
-        scrollY: 0
+        scrollY: 0,
+        selectedFood: {}
       };
     },
     computed: {
@@ -145,12 +153,22 @@
           this.listHeight.push(height);
         }
         console.log(this.listHeight);
+      },
+      // 选择当前点击的食物
+      selectFood(food, event) {
+        if (!event._constructed) {
+          return;
+        }
+        this.selectedFood = food;
+        // 调用food子组件里的show()方法
+        this.$refs.food.show();
       }
     },
 //    注册组件
     components: {
       shopcart,
-      cartcontrol
+      cartcontrol,
+      food
     }
   };
 </script>

@@ -44,5 +44,5 @@ new Vue({
 // 经过上面的配置之后呢，路由匹配到的组件将会渲染到Ap.vue里的<router-view></router-view>
 
 // 设置当前默认页面
-router.push('/goods');
+// router.push('/goods');
 

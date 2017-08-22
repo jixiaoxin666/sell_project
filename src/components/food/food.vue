@@ -65,7 +65,7 @@
   // 引入组件之间通信的bus
   import Bus from '../../common/js/bus.js';
   import Vue from 'vue';
-  // 引入formateDate方法 带花括号是因为该文件是以export function 开始的 文件里面可以定义多个function,如果有多个,我们可以用逗号隔开,例如{formateDate,formateMonth}
+  // 引入formateDate方法 带花括号是因为该文件是以
   import {formatDate} from 'common/js/date';
   // 引入增减商品数量组件
   import cartcontrol from 'components/cartcontrol/cartcontrol';
@@ -99,19 +99,24 @@
     created() {
       // 监听子组件(ratingselect)传过来的名为'ratingtype.select'的事件
       Bus.$on('ratingtype.select', target => {
+        console.log('cc');
         this.selectType = target;
         // nextTick()在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
         // 异步更新scroll
         this.$nextTick(() => {
-          this.scroll.refresh();
+          if (this.scroll) {
+            this.scroll.refresh();
+          }
         });
       });
       // 监听子组件(ratingselect)传过来的名为'content.toggle'的事件
       Bus.$on('content.toggle', target => {
-        this.onlyContent = !target;
+        this.onlyContent = target;
         // 异步更新scroll
         this.$nextTick(() => {
-          this.scroll.refresh();
+          if (this.scroll) {
+            this.scroll.refresh();
+          }
         });
       });
     },
@@ -163,7 +168,6 @@
       // 把时间戳转换成时间格式
       formatDate(time) {
         let date = new Date(time);
-        // 在common/js/date.js中定义
         return formatDate(date, 'yyyy-MM-dd hh:mm');
       }
     },

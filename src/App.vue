@@ -15,14 +15,20 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <!-- 路由出口 -->
-    <!-- 路由匹配到的组件将渲染在这里 -->
-    <!--将seller传递给组件-->
-    <router-view :seller="seller"></router-view>
+
+    <!--keep-alive组件 用来缓存组件,避免多次加载相应的组件,减少性能消耗-->
+    <keep-alive>
+      <!-- 路由出口 -->
+      <!-- 路由匹配到的组件将渲染在这里 -->
+      <!--将seller传递给组件-->
+    <router-view :seller="seller" ></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  // 引入urlParse方法
+  import {urlParse} from './common/js/util';
   import header from './components/header/header.vue';
 
   const ERR_OK = 0;
@@ -30,15 +36,28 @@
   export default {
     data() {
       return {
-        seller: {}
+        seller: {
+          id: (() => {
+            let queryParam = urlParse();
+            console.log(queryParam);
+            return queryParam.id;
+          })()
+          // 立即执行函数
+        }
       };
     },
     created() {
-      this.$http.get('/api/seller').then((response) => {
+      this.$http.get('/api/seller?id=' + this.seller.id).then((response) => {
         response = response.body;
-        console.log(response);
+        console.log('kaishi');
+        console.log(response.data);
+        console.log(this.seller);
         if (response.errno === ERR_OK) {
-          this.seller = response.data;
+          // 追加id属性
+          // 有时你想向已有对象上添加一些属性，例如使用 Object.assign() 或 _.extend() 方法来添加属性。但是，添加到对象上的新属性不会触发更新。在这种情况下可以创建一个新的对象，让它包含原对象的属性和新的属性：
+          // 代替 `Object.assign(this.someObject, { id: 12345, a:b })`
+          // 使用 this.someObject = Object.assign({}, this.someObject, { id: 12345, a:b })
+          this.seller = Object.assign({}, this.seller, response.data);
           console.log(this.seller);
         }
       });

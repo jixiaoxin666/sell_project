@@ -2,6 +2,7 @@ require('./check-versions')()
 
 process.env.NODE_ENV = 'production'
 
+// 长时间运行的异步任务的提示
 var ora = require('ora')
 var rm = require('rimraf')
 var path = require('path')
@@ -10,6 +11,7 @@ var webpack = require('webpack')
 var config = require('../config')
 var webpackConfig = require('./webpack.prod.conf')
 
+// 运行npm run build 显示的文字
 var spinner = ora('building for production...')
 spinner.start()
 
